@@ -1,0 +1,8 @@
+.vs/*
+openssl.2015.VC.db
+Win32/*
+x64/*
+out/*
+openssl-1.*
+openssl-1.*/
+7za*.exe
