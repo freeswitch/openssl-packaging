@@ -48,7 +48,7 @@ using System.Diagnostics;
             Log.LogMessage(MessageImportance.High,
                  "Building packages.");
             
-            string package_root = @"$(BaseDir)out\packages\openssl-$(OpenSSLVersion)-headers\openssl-$(OpenSSLVersion)";
+            string package_root = @"$(BaseDir)out\packages\openssl-$(opensslVersion)-headers\openssl-$(opensslVersion)";
             
             if (!FileOrDirectoryExists(package_root))
             {
@@ -58,23 +58,19 @@ using System.Diagnostics;
                 CopyFilesRecursively(new DirectoryInfo("include_x86"), new DirectoryInfo(package_root + @"\include_x86"));
                 Directory.CreateDirectory(package_root + @"\include_x64");
                 CopyFilesRecursively(new DirectoryInfo("include_x64"), new DirectoryInfo(package_root + @"\include_x64"));
-
-                ZipFile.CreateFromDirectory(@"$(BaseDir)out\packages\openssl-$(OpenSSLVersion)-headers\", @"$(BaseDir)out\openssl-$(OpenSSLVersion)-headers.zip".ToLower(), CompressionLevel.Optimal, false);
+                ZipFile.CreateFromDirectory(@"$(BaseDir)out\packages\openssl-$(opensslVersion)-headers\", @"$(BaseDir)out\openssl-$(opensslVersion)-headers.zip".ToLower(), CompressionLevel.Optimal, false);
             }
 
-            package_root = @"$(BaseDir)out\packages\openssl-$(OpenSSLVersion)-binaries-$(Platform)-$(Configuration)\openssl-$(OpenSSLVersion)";
+            package_root = @"$(BaseDir)out\packages\openssl-$(opensslVersion)-binaries-$(Platform)-$(Configuration)\openssl-$(opensslVersion)";
             if (!FileOrDirectoryExists(package_root))
             {
                 Directory.CreateDirectory(package_root + @"\binaries\$(Platform)\$(Configuration)");
-                string[] files = {"libeay32.dll", "libeay32.lib", "openssl.exe", "ssleay32.dll", "ssleay32.lib"};
-                foreach (string f in files) {        
-                    File.Copy(@"out\$(Platform)\$(Configuration)\" + f, package_root + @"\binaries\$(Platform)\$(Configuration)\" + f);
+                string[] files = {"libssl.lib", "libcrypto.lib"};
+                foreach (string f in files) {
+                    File.Copy(@"build-$(Platform)-$(Configuration)\OpenSSL\lib\" + f, package_root + @"\binaries\$(Platform)\$(Configuration)\" + f);
                 }
-                string[] def_files = {"libeay32.def","ssleay32.def"};
-                foreach (string f in def_files) {        
-                    File.Copy(f, package_root + @"\binaries\$(Platform)\$(Configuration)\" + f);
-                }
-                ZipFile.CreateFromDirectory(@"$(BaseDir)out\packages\openssl-$(OpenSSLVersion)-binaries-$(Platform)-$(Configuration)\", @"$(BaseDir)out\openssl-$(OpenSSLVersion)-binaries-$(Platform)-$(Configuration).zip".ToLower(), CompressionLevel.Optimal, false);
+                File.Copy(@"build-$(Platform)-$(Configuration)\OpenSSL\bin\openssl.exe", package_root + @"\binaries\$(Platform)\$(Configuration)\openssl.exe");
+                ZipFile.CreateFromDirectory(@"$(BaseDir)out\packages\openssl-$(opensslVersion)-binaries-$(Platform)-$(Configuration)\", @"$(BaseDir)out\openssl-$(opensslVersion)-binaries-$(Platform)-$(Configuration).zip".ToLower(), CompressionLevel.Optimal, false);
             }
 
             return true;

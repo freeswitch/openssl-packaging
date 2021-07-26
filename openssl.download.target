@@ -24,13 +24,14 @@
        extractto: Folder to extract an archive to
    -->
 
-  <Target Name="opensslDownloadTarget" BeforeTargets="CustomBuild;PreBuildEvent" DependsOnTargets="7za">  
+  <Target Name="opensslDownloadTarget" BeforeTargets="CustomBuild;PreBuildEvent;Build" DependsOnTargets="7za">  
       <DownloadPackageTask 
-           package="http://files.freeswitch.org/downloads/libs/openssl-$(OpenSSLVersion).tar.gz"
-           expectfileordirectory="$(BaseDir)openssl-$(OpenSSLVersion)" 
-           outputfolder=""
+           package="https://www.openssl.org/source/openssl-$(opensslVersion).tar.gz"
+           expectfileordirectory="$(BaseDir)build-$(Platform)-$(Configuration)\openssl-$(opensslVersion)\e_os.h" 
+           outputfolder="$(BaseDir)"
            outputfilename="" 
            extractto="$(BaseDir)"
+           moveafter="openssl-$(opensslVersion)|build-$(Platform)-$(Configuration)\openssl-$(opensslVersion)"
       />
   </Target> 
 

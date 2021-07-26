@@ -6,3 +6,9 @@ out/*
 openssl-1.*
 openssl-1.*/
 7za*.exe
+pax_global_header
+build-*
+zlib*.zip
+zlib*/
+Debug/
+Release/

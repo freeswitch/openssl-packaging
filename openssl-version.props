@@ -4,17 +4,17 @@
     <Import Project="basedir.props" Condition=" '$(BaseDirImported)' == ''"/>
   </ImportGroup>
   <PropertyGroup Label="UserMacros">
-    <OpenSSLVersion>1.0.2k</OpenSSLVersion>
-    <OpenSSLLibDir>$(BaseDir)libs\openssl-$(OpenSSLVersion)</OpenSSLLibDir>
+    <opensslVersion>1.1.1k</opensslVersion>
+    <opensslLibDir>$(BaseDir)openssl-$(opensslVersion)</opensslLibDir>
   </PropertyGroup>
   <PropertyGroup>
-    <OpenSSLVersionImported>true</OpenSSLVersionImported>
+    <opensslVersionImported>true</opensslVersionImported>
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup />
   <ItemGroup>
-    <BuildMacro Include="OpenSSLVersion">
-      <Value>$(OpenSSLVersion)</Value>
+    <BuildMacro Include="opensslVersion">
+      <Value>$(opensslVersion)</Value>
     </BuildMacro>
   </ItemGroup>
   <ImportGroup Label="PropertySheets">
