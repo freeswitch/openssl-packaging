@@ -65,7 +65,7 @@ using System.Diagnostics;
             if (!FileOrDirectoryExists(package_root))
             {
                 Directory.CreateDirectory(package_root + @"\binaries\$(Platform)\$(Configuration)");
-                string[] files = {"libssl.lib", "libcrypto.lib"};
+                string[] files = {"libssl.lib", "libcrypto.lib", "ossl_static.pdb"};
                 foreach (string f in files) {
                     File.Copy(@"build-$(Platform)-$(Configuration)\OpenSSL\lib\" + f, package_root + @"\binaries\$(Platform)\$(Configuration)\" + f);
                 }
