@@ -5,6 +5,8 @@ x64/*
 out/*
 openssl-1.*
 openssl-1.*/
+openssl-3.*
+openssl-3.*/
 7za*.exe
 pax_global_header
 build-*
