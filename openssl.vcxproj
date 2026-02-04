@@ -62,7 +62,7 @@
   <PropertyGroup Label="UserMacros" />
   <Target Name="Build">
     <MakeDir Directories="$(WorkDir)" />
-    <Exec Command="perl Configure $(BuildArg) no-shared no-tests --$(BuildType) --prefix=$(BaseDir)$(WorkDir)\OpenSSL --openssldir=$(BaseDir)$(WorkDir)\OpenSSLConf --with-zlib-include=$(zlibLibDir)\include" WorkingDirectory="$(SrcDir)"/>
+    <Exec Command="perl Configure $(BuildArg) no-shared no-tests no-autoload-config --$(BuildType) --prefix=$(BaseDir)$(WorkDir)\OpenSSL --openssldir=&quot;C:/Program Files/FreeSWITCH/ssl&quot; --with-zlib-include=$(zlibLibDir)\include" WorkingDirectory="$(SrcDir)"/>
     <Exec Command="../../vc_env.cmd $(MSBuildVersion) $(BitCount)" WorkingDirectory="$(SrcDir)"/>
   </Target>
 </Project>
